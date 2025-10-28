@@ -1,0 +1,23 @@
+{
+  "name": "cloudflare-vite-get-started",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "npm run build && vite preview",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.13.16",
+    "@tailwindcss/vite": "^4.1.16",
+    "handlebars": "^4.7.8",
+    "vite": "^7.1.12",
+    "wrangler": "^4.45.1"
+  },
+  "dependencies": {
+    "resend": "^6.3.0-canary.4",
+    "vite-plugin-handlebars": "^2.0.0"
+  }
+}
