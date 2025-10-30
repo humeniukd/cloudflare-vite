@@ -1,10 +1,11 @@
-{{#> index signup=true signin=true }}
-<form class="space-y-5" action="/signup" method="POST">
-  {{> input id="name" name="name" placeholder="Full name" minlength="5" value="${name}" autocomplete="name" label="Your name"}}
-  {{> input id="email" name="email" placeholder="Email address" type="email" value="${email}" autocomplete="email" label="Email address"}}
-  {{> input id="password" name="password" placeholder="Password" type="password" minlength="8" autocomplete="new-password" label="Password" showHide=1}}
-  {{> input id="confirm-password" placeholder="Confirm password" type="password" minlength="8" autocomplete="new-password" label="Confirm password"}}
+import { oauth, button, input } from './partials';
 
+export default ({ name, email, error, redirect, template }) => template('Sign up with a new account', `
+<form class="space-y-5" action="/signup" method="POST">
+    ${input({id: 'name', name: 'name', placeholder: 'Full name', minlength: 5, value: name, autocomplete: 'name', label:'Your name'})}
+    ${input({id: 'email', name: 'email', placeholder: "Email address", type: 'email', value: email, autocomplete: 'email', label: 'Email address'})}
+    ${input({id: 'password', name: 'password', placeholder: "Password", type: 'password', minlength: 8, autocomplete: 'new-password', label: 'Password', showHide: true})}
+    ${input({id: 'confirm-password', placeholder: "Confirm password", type: 'password', minlength: 8, autocomplete: 'new-password', label: 'Confirm password'})}
   <div>
     <label class="text-base/6 select-none sm:text-sm/6" for="file">
       Profile Image (optional)
@@ -18,16 +19,13 @@
         </span>
       </span>
     </div>
-    <p class="pt-2 text-base/6 text-red-600 sm:text-sm/6 dark:text-red-500">${error}</p>
+    ${error ? `<p class="pt-2 text-base/6 text-red-600 sm:text-sm/6 dark:text-red-500">${error}</p>` : ''}
   </div>
-  {{#> button }}
-Sign up
-
-  {{/button}}
+  ${button('Sign up')}
 </form>
 <p class="pt-2 text-gray-700 text-sm dark:text-gray-300">
   <span >Have an account?</span>
   <a href="/signin" class="float-right cursor-pointer hover:text-black hover:dark:text-white" type="submit">Sign in</a>
 </p>
-{{> social}}
-{{/index}}
+${oauth(redirect)}
+`)
